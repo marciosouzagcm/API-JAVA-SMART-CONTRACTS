@@ -5,17 +5,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.votacao.api.ApiJavaSmartContractsApplication; // Importe sua classe principal
 
-@SpringBootTest(classes = ApiJavaSmartContractsApplication.class) // Use a classe principal correta
+@SpringBootTest(classes = ApiJavaSmartContractsApplication.class) // Garante que sua aplicação principal seja carregada
 class ApiJavaSmartContractsApplicationTests {
 
     @Test
     void contextLoads() {
-        // Este método de teste é intencionalmente deixado vazio para verificar se o contexto da aplicação Spring é carregado com sucesso.
-    }
-
-    private static class ApiJavaSmartContractsApplication {
-
-        public ApiJavaSmartContractsApplication() {
-        }
+        // Este método de teste é usado para verificar se o contexto da aplicação Spring
+        // Boot
+        // pode ser carregado com sucesso sem erros. Se o contexto carregar, o teste
+        // passará.
+        // Se houver qualquer problema na configuração ou nos beans da sua aplicação,
+        // este teste irá falhar e indicar o erro.
     }
 }
