@@ -2344,3 +2344,664 @@ org.web3j.protocol.exceptions.TransactionException: JsonRpcError thrown with cod
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1353) ~[spring-boot-3.3.12.jar:3.3.12]
 	at com.votacao.api.ApiJavaSmartContractsApplication.main(ApiJavaSmartContractsApplication.java:52) ~[classes/:na]
 
+2025-06-16T06:44:46.788-03:00  INFO 18724 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Starting ApiJavaSmartContractsApplication using Java 21.0.7 with PID 18724 (C:\Users\DELL\api-java-smart-contracts\target\classes started by DELL in C:\Users\DELL\api-java-smart-contracts)
+2025-06-16T06:44:46.792-03:00  INFO 18724 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-06-16T06:44:48.417-03:00  INFO 18724 --- [api-java-smart-contracts] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-06-16T06:44:48.435-03:00  INFO 18724 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-16T06:44:48.436-03:00  INFO 18724 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-06-16T06:44:48.527-03:00  INFO 18724 --- [api-java-smart-contracts] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-16T06:44:48.527-03:00  INFO 18724 --- [api-java-smart-contracts] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1665 ms
+2025-06-16T06:44:49.459-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:44:49.460-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:44:49.460-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 66
+2025-06-16T06:44:49.460-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:44:49.465-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}
+2025-06-16T06:44:49.465-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> END POST (66-byte body)
+2025-06-16T06:44:49.498-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- HTTP FAILED: java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8545
+2025-06-16T06:44:49.499-03:00 ERROR 18724 --- [api-java-smart-contracts] [main] b.a.service.BlockchainService            : Erro ao conectar ao nó Ethereum: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8545
+
+java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8545
+	at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:297) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealConnection.connect(RealConnection.kt:207) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:226) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.logging.HttpLoggingInterceptor.intercept(HttpLoggingInterceptor.kt:221) ~[logging-interceptor-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealCall.execute(RealCall.kt:154) ~[okhttp-4.12.0.jar:na]
+	at org.web3j.protocol.http.HttpService.performIO(HttpService.java:159) ~[core-4.10.0.jar:na]
+	at org.web3j.protocol.Service.send(Service.java:48) ~[core-4.10.0.jar:na]
+	at org.web3j.protocol.core.Request.send(Request.java:87) ~[core-4.10.0.jar:na]
+	at blockchain.api_java_smart_contracts.service.BlockchainService.init(BlockchainService.java:35) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeInitMethods(InitDestroyAnnotationBeanPostProcessor.java:401) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:219) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:422) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1798) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:971) ~[spring-context-6.1.20.jar:6.1.20]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625) ~[spring-context-6.1.20.jar:6.1.20]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:755) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1364) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1353) ~[spring-boot-3.3.12.jar:3.3.12]
+	at com.votacao.api.ApiJavaSmartContractsApplication.main(ApiJavaSmartContractsApplication.java:52) ~[classes/:na]
+	Suppressed: java.net.ConnectException: Failed to connect to localhost/127.0.0.1:8545
+		... 45 common frames omitted
+	Caused by: java.net.ConnectException: Connection refused: getsockopt
+		at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+		at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+		at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
+		at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
+		at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+		at java.base/java.net.Socket.connect(Socket.java:751)
+		at okhttp3.internal.platform.Platform.connectSocket(Platform.kt:128)
+		at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:295)
+		... 44 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:751) ~[na:na]
+	at okhttp3.internal.platform.Platform.connectSocket(Platform.kt:128) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:295) ~[okhttp-4.12.0.jar:na]
+	... 44 common frames omitted
+
+2025-06-16T06:44:49.777-03:00  INFO 18724 --- [api-java-smart-contracts] [main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-06-16T06:44:49.865-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2025-06-16T06:44:49.951-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-06-16T06:44:49.990-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-06-16T06:44:50.037-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-06-16T06:44:50.230-03:00  INFO 18724 --- [api-java-smart-contracts] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2025-06-16T06:44:50.247-03:00  INFO 18724 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Started ApiJavaSmartContractsApplication in 4.051 seconds (process running for 4.42)
+2025-06-16T06:44:50.254-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:44:50.254-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:44:50.254-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 66
+2025-06-16T06:44:50.254-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:44:50.254-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":1}
+2025-06-16T06:44:50.254-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> END POST (66-byte body)
+2025-06-16T06:44:50.258-03:00 DEBUG 18724 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- HTTP FAILED: java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8545
+2025-06-16T06:44:50.258-03:00 ERROR 18724 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Erro de comunicação com o nó Ethereum: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8545
+
+java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8545
+	at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:297) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealConnection.connect(RealConnection.kt:207) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:226) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.logging.HttpLoggingInterceptor.intercept(HttpLoggingInterceptor.kt:221) ~[logging-interceptor-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealCall.execute(RealCall.kt:154) ~[okhttp-4.12.0.jar:na]
+	at org.web3j.protocol.http.HttpService.performIO(HttpService.java:159) ~[core-4.10.0.jar:na]
+	at org.web3j.protocol.Service.send(Service.java:48) ~[core-4.10.0.jar:na]
+	at org.web3j.protocol.core.Request.send(Request.java:87) ~[core-4.10.0.jar:na]
+	at com.votacao.api.ApiJavaSmartContractsApplication.run(ApiJavaSmartContractsApplication.java:59) ~[classes/:na]
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:791) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82) ~[spring-core-6.1.20.jar:6.1.20]
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60) ~[spring-core-6.1.20.jar:6.1.20]
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86) ~[spring-core-6.1.20.jar:6.1.20]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:799) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:790) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:775) ~[spring-boot-3.3.12.jar:3.3.12]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184) ~[na:na]
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596) ~[na:na]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:775) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:342) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1364) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1353) ~[spring-boot-3.3.12.jar:3.3.12]
+	at com.votacao.api.ApiJavaSmartContractsApplication.main(ApiJavaSmartContractsApplication.java:52) ~[classes/:na]
+	Suppressed: java.net.ConnectException: Failed to connect to localhost/127.0.0.1:8545
+		... 42 common frames omitted
+	Caused by: java.net.ConnectException: Connection refused: getsockopt
+		at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+		at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+		at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
+		at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
+		at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+		at java.base/java.net.Socket.connect(Socket.java:751)
+		at okhttp3.internal.platform.Platform.connectSocket(Platform.kt:128)
+		at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:295)
+		... 41 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:751) ~[na:na]
+	at okhttp3.internal.platform.Platform.connectSocket(Platform.kt:128) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:295) ~[okhttp-4.12.0.jar:na]
+	... 41 common frames omitted
+
+2025-06-16T06:45:30.141-03:00  INFO 9128 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Starting ApiJavaSmartContractsApplication using Java 21.0.7 with PID 9128 (C:\Users\DELL\api-java-smart-contracts\target\classes started by DELL in C:\Users\DELL\api-java-smart-contracts)
+2025-06-16T06:45:30.144-03:00  INFO 9128 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-06-16T06:45:31.265-03:00  INFO 9128 --- [api-java-smart-contracts] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-06-16T06:45:31.278-03:00  INFO 9128 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-16T06:45:31.278-03:00  INFO 9128 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-06-16T06:45:31.344-03:00  INFO 9128 --- [api-java-smart-contracts] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-16T06:45:31.345-03:00  INFO 9128 --- [api-java-smart-contracts] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1141 ms
+2025-06-16T06:45:31.969-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:45:31.969-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:45:31.969-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 66
+2025-06-16T06:45:31.969-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:45:31.969-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}
+2025-06-16T06:45:31.969-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> END POST (66-byte body)
+2025-06-16T06:45:32.014-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- HTTP FAILED: java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8545
+2025-06-16T06:45:32.015-03:00 ERROR 9128 --- [api-java-smart-contracts] [main] b.a.service.BlockchainService            : Erro ao conectar ao nó Ethereum: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8545
+
+java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8545
+	at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:297) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealConnection.connect(RealConnection.kt:207) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:226) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.logging.HttpLoggingInterceptor.intercept(HttpLoggingInterceptor.kt:221) ~[logging-interceptor-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealCall.execute(RealCall.kt:154) ~[okhttp-4.12.0.jar:na]
+	at org.web3j.protocol.http.HttpService.performIO(HttpService.java:159) ~[core-4.10.0.jar:na]
+	at org.web3j.protocol.Service.send(Service.java:48) ~[core-4.10.0.jar:na]
+	at org.web3j.protocol.core.Request.send(Request.java:87) ~[core-4.10.0.jar:na]
+	at blockchain.api_java_smart_contracts.service.BlockchainService.init(BlockchainService.java:35) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeInitMethods(InitDestroyAnnotationBeanPostProcessor.java:401) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:219) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:422) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1798) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975) ~[spring-beans-6.1.20.jar:6.1.20]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:971) ~[spring-context-6.1.20.jar:6.1.20]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625) ~[spring-context-6.1.20.jar:6.1.20]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:755) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1364) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1353) ~[spring-boot-3.3.12.jar:3.3.12]
+	at com.votacao.api.ApiJavaSmartContractsApplication.main(ApiJavaSmartContractsApplication.java:52) ~[classes/:na]
+	Suppressed: java.net.ConnectException: Failed to connect to localhost/127.0.0.1:8545
+		... 45 common frames omitted
+	Caused by: java.net.ConnectException: Connection refused: getsockopt
+		at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+		at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+		at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
+		at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
+		at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+		at java.base/java.net.Socket.connect(Socket.java:751)
+		at okhttp3.internal.platform.Platform.connectSocket(Platform.kt:128)
+		at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:295)
+		... 44 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:751) ~[na:na]
+	at okhttp3.internal.platform.Platform.connectSocket(Platform.kt:128) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:295) ~[okhttp-4.12.0.jar:na]
+	... 44 common frames omitted
+
+2025-06-16T06:45:32.175-03:00  INFO 9128 --- [api-java-smart-contracts] [main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-06-16T06:45:32.234-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2025-06-16T06:45:32.291-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-06-16T06:45:32.307-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-06-16T06:45:32.343-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-06-16T06:45:32.452-03:00  INFO 9128 --- [api-java-smart-contracts] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2025-06-16T06:45:32.452-03:00  INFO 9128 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Started ApiJavaSmartContractsApplication in 2.723 seconds (process running for 3.217)
+2025-06-16T06:45:32.468-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:45:32.468-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:45:32.468-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 66
+2025-06-16T06:45:32.469-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:45:32.469-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":1}
+2025-06-16T06:45:32.469-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> END POST (66-byte body)
+2025-06-16T06:45:32.471-03:00 DEBUG 9128 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- HTTP FAILED: java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8545
+2025-06-16T06:45:32.471-03:00 ERROR 9128 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Erro de comunicação com o nó Ethereum: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8545
+
+java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8545
+	at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:297) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealConnection.connect(RealConnection.kt:207) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:226) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.logging.HttpLoggingInterceptor.intercept(HttpLoggingInterceptor.kt:221) ~[logging-interceptor-4.12.0.jar:na]
+	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealCall.execute(RealCall.kt:154) ~[okhttp-4.12.0.jar:na]
+	at org.web3j.protocol.http.HttpService.performIO(HttpService.java:159) ~[core-4.10.0.jar:na]
+	at org.web3j.protocol.Service.send(Service.java:48) ~[core-4.10.0.jar:na]
+	at org.web3j.protocol.core.Request.send(Request.java:87) ~[core-4.10.0.jar:na]
+	at com.votacao.api.ApiJavaSmartContractsApplication.run(ApiJavaSmartContractsApplication.java:59) ~[classes/:na]
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:791) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82) ~[spring-core-6.1.20.jar:6.1.20]
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60) ~[spring-core-6.1.20.jar:6.1.20]
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86) ~[spring-core-6.1.20.jar:6.1.20]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:799) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:790) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:775) ~[spring-boot-3.3.12.jar:3.3.12]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184) ~[na:na]
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596) ~[na:na]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:775) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:342) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1364) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1353) ~[spring-boot-3.3.12.jar:3.3.12]
+	at com.votacao.api.ApiJavaSmartContractsApplication.main(ApiJavaSmartContractsApplication.java:52) ~[classes/:na]
+	Suppressed: java.net.ConnectException: Failed to connect to localhost/127.0.0.1:8545
+		... 42 common frames omitted
+	Caused by: java.net.ConnectException: Connection refused: getsockopt
+		at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+		at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+		at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
+		at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
+		at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+		at java.base/java.net.Socket.connect(Socket.java:751)
+		at okhttp3.internal.platform.Platform.connectSocket(Platform.kt:128)
+		at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:295)
+		... 41 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:751) ~[na:na]
+	at okhttp3.internal.platform.Platform.connectSocket(Platform.kt:128) ~[okhttp-4.12.0.jar:na]
+	at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:295) ~[okhttp-4.12.0.jar:na]
+	... 41 common frames omitted
+
+2025-06-16T06:47:35.719-03:00  INFO 16388 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Starting ApiJavaSmartContractsApplication using Java 21.0.7 with PID 16388 (C:\Users\DELL\api-java-smart-contracts\target\classes started by DELL in C:\Users\DELL\api-java-smart-contracts)
+2025-06-16T06:47:35.723-03:00  INFO 16388 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-06-16T06:47:37.411-03:00  INFO 16388 --- [api-java-smart-contracts] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-06-16T06:47:37.430-03:00  INFO 16388 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-16T06:47:37.430-03:00  INFO 16388 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-06-16T06:47:37.505-03:00  INFO 16388 --- [api-java-smart-contracts] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-16T06:47:37.507-03:00  INFO 16388 --- [api-java-smart-contracts] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1725 ms
+2025-06-16T06:47:38.413-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:47:38.413-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:47:38.413-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 66
+2025-06-16T06:47:38.414-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:47:38.417-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}
+2025-06-16T06:47:38.417-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> END POST (66-byte body)
+2025-06-16T06:47:38.464-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- 200 OK http://localhost:8545/ (46ms)
+2025-06-16T06:47:38.464-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json
+2025-06-16T06:47:38.464-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Date: Mon, 16 Jun 2025 09:47:38 GMT
+2025-06-16T06:47:38.464-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Connection: keep-alive
+2025-06-16T06:47:38.464-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Keep-Alive: timeout=5
+2025-06-16T06:47:38.465-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 88
+2025-06-16T06:47:38.466-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:47:38.466-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"id":0,"jsonrpc":"2.0","result":"Ganache/v7.7.3/EthereumJS TestRPC/v7.7.3/ethereum-js"}
+2025-06-16T06:47:38.466-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- END HTTP (88-byte body)
+2025-06-16T06:47:38.505-03:00  INFO 16388 --- [api-java-smart-contracts] [main] b.a.service.BlockchainService            : Conectado ao nó Ethereum - Versão: Ganache/v7.7.3/EthereumJS TestRPC/v7.7.3/ethereum-js
+2025-06-16T06:47:38.721-03:00  INFO 16388 --- [api-java-smart-contracts] [main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-06-16T06:47:38.790-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2025-06-16T06:47:38.865-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-06-16T06:47:38.903-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-06-16T06:47:38.932-03:00 DEBUG 16388 --- [api-java-smart-contracts] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-06-16T06:47:39.216-03:00  WARN 16388 --- [api-java-smart-contracts] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-06-16T06:47:39.252-03:00  INFO 16388 --- [api-java-smart-contracts] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-06-16T06:47:39.285-03:00 ERROR 16388 --- [api-java-smart-contracts] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+2025-06-16T06:47:59.646-03:00  INFO 12236 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Starting ApiJavaSmartContractsApplication using Java 21.0.7 with PID 12236 (C:\Users\DELL\api-java-smart-contracts\target\classes started by DELL in C:\Users\DELL\api-java-smart-contracts)
+2025-06-16T06:47:59.650-03:00  INFO 12236 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-06-16T06:48:01.076-03:00  INFO 12236 --- [api-java-smart-contracts] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-06-16T06:48:01.089-03:00  INFO 12236 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-16T06:48:01.089-03:00  INFO 12236 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-06-16T06:48:01.156-03:00  INFO 12236 --- [api-java-smart-contracts] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-16T06:48:01.157-03:00  INFO 12236 --- [api-java-smart-contracts] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1455 ms
+2025-06-16T06:48:02.456-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:48:02.457-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:48:02.457-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 66
+2025-06-16T06:48:02.457-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:48:02.460-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}
+2025-06-16T06:48:02.462-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> END POST (66-byte body)
+2025-06-16T06:48:02.527-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- 200 OK http://localhost:8545/ (66ms)
+2025-06-16T06:48:02.527-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json
+2025-06-16T06:48:02.529-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Date: Mon, 16 Jun 2025 09:48:02 GMT
+2025-06-16T06:48:02.529-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Connection: keep-alive
+2025-06-16T06:48:02.529-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Keep-Alive: timeout=5
+2025-06-16T06:48:02.529-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 88
+2025-06-16T06:48:02.529-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:48:02.529-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"id":0,"jsonrpc":"2.0","result":"Ganache/v7.7.3/EthereumJS TestRPC/v7.7.3/ethereum-js"}
+2025-06-16T06:48:02.529-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- END HTTP (88-byte body)
+2025-06-16T06:48:02.600-03:00  INFO 12236 --- [api-java-smart-contracts] [main] b.a.service.BlockchainService            : Conectado ao nó Ethereum - Versão: Ganache/v7.7.3/EthereumJS TestRPC/v7.7.3/ethereum-js
+2025-06-16T06:48:03.095-03:00  INFO 12236 --- [api-java-smart-contracts] [main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-06-16T06:48:03.264-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2025-06-16T06:48:03.468-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-06-16T06:48:03.549-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-06-16T06:48:03.636-03:00 DEBUG 12236 --- [api-java-smart-contracts] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-06-16T06:48:03.935-03:00  WARN 12236 --- [api-java-smart-contracts] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-06-16T06:48:03.980-03:00  INFO 12236 --- [api-java-smart-contracts] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-06-16T06:48:04.036-03:00 ERROR 12236 --- [api-java-smart-contracts] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+2025-06-16T06:48:18.014-03:00  INFO 17912 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Starting ApiJavaSmartContractsApplication using Java 21.0.7 with PID 17912 (C:\Users\DELL\api-java-smart-contracts\target\classes started by DELL in C:\Users\DELL\api-java-smart-contracts)
+2025-06-16T06:48:18.023-03:00  INFO 17912 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-06-16T06:48:20.450-03:00  INFO 17912 --- [api-java-smart-contracts] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-06-16T06:48:20.466-03:00  INFO 17912 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-16T06:48:20.469-03:00  INFO 17912 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-06-16T06:48:20.570-03:00  INFO 17912 --- [api-java-smart-contracts] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-16T06:48:20.571-03:00  INFO 17912 --- [api-java-smart-contracts] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2443 ms
+2025-06-16T06:48:21.895-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:48:21.895-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:48:21.895-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 66
+2025-06-16T06:48:21.895-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:48:21.895-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}
+2025-06-16T06:48:21.895-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> END POST (66-byte body)
+2025-06-16T06:48:21.950-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- 200 OK http://localhost:8545/ (49ms)
+2025-06-16T06:48:21.950-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json
+2025-06-16T06:48:21.950-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Date: Mon, 16 Jun 2025 09:48:21 GMT
+2025-06-16T06:48:21.951-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Connection: keep-alive
+2025-06-16T06:48:21.951-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Keep-Alive: timeout=5
+2025-06-16T06:48:21.951-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 88
+2025-06-16T06:48:21.951-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:48:21.951-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"id":0,"jsonrpc":"2.0","result":"Ganache/v7.7.3/EthereumJS TestRPC/v7.7.3/ethereum-js"}
+2025-06-16T06:48:21.951-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- END HTTP (88-byte body)
+2025-06-16T06:48:22.000-03:00  INFO 17912 --- [api-java-smart-contracts] [main] b.a.service.BlockchainService            : Conectado ao nó Ethereum - Versão: Ganache/v7.7.3/EthereumJS TestRPC/v7.7.3/ethereum-js
+2025-06-16T06:48:22.356-03:00  INFO 17912 --- [api-java-smart-contracts] [main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-06-16T06:48:22.455-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2025-06-16T06:48:22.572-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-06-16T06:48:22.618-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-06-16T06:48:22.676-03:00 DEBUG 17912 --- [api-java-smart-contracts] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-06-16T06:48:22.917-03:00  WARN 17912 --- [api-java-smart-contracts] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-06-16T06:48:22.947-03:00  INFO 17912 --- [api-java-smart-contracts] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-06-16T06:48:22.978-03:00 ERROR 17912 --- [api-java-smart-contracts] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+2025-06-16T06:49:48.574-03:00  INFO 2140 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Starting ApiJavaSmartContractsApplication using Java 21.0.7 with PID 2140 (C:\Users\DELL\api-java-smart-contracts\target\classes started by DELL in C:\Users\DELL\api-java-smart-contracts)
+2025-06-16T06:49:48.577-03:00  INFO 2140 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-06-16T06:49:49.609-03:00  INFO 2140 --- [api-java-smart-contracts] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-06-16T06:49:49.625-03:00  INFO 2140 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-16T06:49:49.626-03:00  INFO 2140 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-06-16T06:49:49.690-03:00  INFO 2140 --- [api-java-smart-contracts] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-16T06:49:49.690-03:00  INFO 2140 --- [api-java-smart-contracts] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1069 ms
+2025-06-16T06:49:50.266-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:49:50.267-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:49:50.267-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 66
+2025-06-16T06:49:50.267-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:49:50.270-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}
+2025-06-16T06:49:50.271-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> END POST (66-byte body)
+2025-06-16T06:49:50.311-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- 200 OK http://localhost:8545/ (39ms)
+2025-06-16T06:49:50.312-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json
+2025-06-16T06:49:50.312-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Date: Mon, 16 Jun 2025 09:49:50 GMT
+2025-06-16T06:49:50.312-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Connection: keep-alive
+2025-06-16T06:49:50.313-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Keep-Alive: timeout=5
+2025-06-16T06:49:50.313-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 88
+2025-06-16T06:49:50.313-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:49:50.313-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"id":0,"jsonrpc":"2.0","result":"Ganache/v7.7.3/EthereumJS TestRPC/v7.7.3/ethereum-js"}
+2025-06-16T06:49:50.314-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- END HTTP (88-byte body)
+2025-06-16T06:49:50.345-03:00  INFO 2140 --- [api-java-smart-contracts] [main] b.a.service.BlockchainService            : Conectado ao nó Ethereum - Versão: Ganache/v7.7.3/EthereumJS TestRPC/v7.7.3/ethereum-js
+2025-06-16T06:49:50.490-03:00  INFO 2140 --- [api-java-smart-contracts] [main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-06-16T06:49:50.572-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2025-06-16T06:49:50.636-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-06-16T06:49:50.657-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-06-16T06:49:50.680-03:00 DEBUG 2140 --- [api-java-smart-contracts] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-06-16T06:49:50.807-03:00  WARN 2140 --- [api-java-smart-contracts] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-06-16T06:49:50.830-03:00  INFO 2140 --- [api-java-smart-contracts] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-06-16T06:49:50.843-03:00 ERROR 2140 --- [api-java-smart-contracts] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+2025-06-16T06:50:29.450-03:00  INFO 15592 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Starting ApiJavaSmartContractsApplication using Java 21.0.7 with PID 15592 (C:\Users\DELL\api-java-smart-contracts\target\classes started by DELL in C:\Users\DELL\api-java-smart-contracts)
+2025-06-16T06:50:29.458-03:00  INFO 15592 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-06-16T06:50:30.468-03:00  INFO 15592 --- [api-java-smart-contracts] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-06-16T06:50:30.468-03:00  INFO 15592 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-16T06:50:30.468-03:00  INFO 15592 --- [api-java-smart-contracts] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-06-16T06:50:30.539-03:00  INFO 15592 --- [api-java-smart-contracts] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-16T06:50:30.539-03:00  INFO 15592 --- [api-java-smart-contracts] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1015 ms
+2025-06-16T06:50:31.086-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:50:31.086-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:50:31.086-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 66
+2025-06-16T06:50:31.086-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:50:31.086-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}
+2025-06-16T06:50:31.086-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> END POST (66-byte body)
+2025-06-16T06:50:31.135-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- 200 OK http://localhost:8545/ (34ms)
+2025-06-16T06:50:31.135-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json
+2025-06-16T06:50:31.135-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Date: Mon, 16 Jun 2025 09:50:31 GMT
+2025-06-16T06:50:31.135-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Connection: keep-alive
+2025-06-16T06:50:31.135-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Keep-Alive: timeout=5
+2025-06-16T06:50:31.135-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 88
+2025-06-16T06:50:31.135-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:50:31.135-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"id":0,"jsonrpc":"2.0","result":"Ganache/v7.7.3/EthereumJS TestRPC/v7.7.3/ethereum-js"}
+2025-06-16T06:50:31.135-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- END HTTP (88-byte body)
+2025-06-16T06:50:31.161-03:00  INFO 15592 --- [api-java-smart-contracts] [main] b.a.service.BlockchainService            : Conectado ao nó Ethereum - Versão: Ganache/v7.7.3/EthereumJS TestRPC/v7.7.3/ethereum-js
+2025-06-16T06:50:31.320-03:00  INFO 15592 --- [api-java-smart-contracts] [main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-06-16T06:50:31.381-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2025-06-16T06:50:31.446-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-06-16T06:50:31.461-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-06-16T06:50:31.495-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-06-16T06:50:31.619-03:00  INFO 15592 --- [api-java-smart-contracts] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2025-06-16T06:50:31.635-03:00  INFO 15592 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Started ApiJavaSmartContractsApplication in 2.711 seconds (process running for 3.124)
+2025-06-16T06:50:31.644-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:50:31.644-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:50:31.645-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 66
+2025-06-16T06:50:31.645-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:50:31.645-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":1}
+2025-06-16T06:50:31.646-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> END POST (66-byte body)
+2025-06-16T06:50:31.649-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- 200 OK http://localhost:8545/ (2ms)
+2025-06-16T06:50:31.650-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json
+2025-06-16T06:50:31.650-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Date: Mon, 16 Jun 2025 09:50:31 GMT
+2025-06-16T06:50:31.650-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Connection: keep-alive
+2025-06-16T06:50:31.650-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Keep-Alive: timeout=5
+2025-06-16T06:50:31.651-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 88
+2025-06-16T06:50:31.651-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:50:31.651-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"id":1,"jsonrpc":"2.0","result":"Ganache/v7.7.3/EthereumJS TestRPC/v7.7.3/ethereum-js"}
+2025-06-16T06:50:31.651-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- END HTTP (88-byte body)
+2025-06-16T06:50:31.652-03:00  INFO 15592 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Conectado ao nó Ethereum: http://localhost:8545
+2025-06-16T06:50:31.654-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:50:31.654-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:50:31.655-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 115
+2025-06-16T06:50:31.655-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:50:31.655-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"eth_getBalance","params":["0xb98b45e094d07926522b659bce5dd0d9eeab6d93","latest"],"id":2}
+2025-06-16T06:50:31.655-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> END POST (115-byte body)
+2025-06-16T06:50:31.658-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- 200 OK http://localhost:8545/ (2ms)
+2025-06-16T06:50:31.658-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json
+2025-06-16T06:50:31.659-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Date: Mon, 16 Jun 2025 09:50:31 GMT
+2025-06-16T06:50:31.659-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Connection: keep-alive
+2025-06-16T06:50:31.659-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Keep-Alive: timeout=5
+2025-06-16T06:50:31.659-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 55
+2025-06-16T06:50:31.659-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:50:31.660-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"id":2,"jsonrpc":"2.0","result":"0x56a74a247d28926a4"}
+2025-06-16T06:50:31.660-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- END HTTP (55-byte body)
+2025-06-16T06:50:31.663-03:00  INFO 15592 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Saldo da conta 0xb98b45e094d07926522b659bce5dd0d9eeab6d93: 99.904.654.863.225.136.804 Wei
+2025-06-16T06:50:31.664-03:00  INFO 15592 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Endereço do contrato de votação: 0xDFA4475665F3718Eed0a2fA9af3CfF737bb3E206
+2025-06-16T06:50:31.665-03:00  INFO 15592 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Tentando adicionar candidato 'Candidato Teste'...
+2025-06-16T06:50:31.677-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:50:31.677-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:50:31.677-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : Content-Length: 378
+2025-06-16T06:50:31.677-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:50:31.678-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"eth_estimateGas","params":[{"from":"0xb98b45e094d07926522b659bce5dd0d9eeab6d93","to":"0xDFA4475665F3718Eed0a2fA9af3CfF737bb3E206","data":"0x985c64d00000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000f43616e64696461746f2054657374650000000000000000000000000000000000"}],"id":3}
+2025-06-16T06:50:31.678-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : --> END POST (378-byte body)
+2025-06-16T06:50:31.767-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : <-- 200 OK http://localhost:8545/ (89ms)
+2025-06-16T06:50:31.768-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : Content-Type: application/json
+2025-06-16T06:50:31.768-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : Date: Mon, 16 Jun 2025 09:50:31 GMT
+2025-06-16T06:50:31.768-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : Connection: keep-alive
+2025-06-16T06:50:31.769-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : Keep-Alive: timeout=5
+2025-06-16T06:50:31.769-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : Content-Length: 43
+2025-06-16T06:50:31.769-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:50:31.769-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : {"id":3,"jsonrpc":"2.0","result":"0x17a6b"}
+2025-06-16T06:50:31.769-03:00 DEBUG 15592 --- [api-java-smart-contracts] [pool-2-thread-1] org.web3j.protocol.http.HttpService      : <-- END HTTP (43-byte body)
+2025-06-16T06:50:31.771-03:00  INFO 15592 --- [api-java-smart-contracts] [main] b.a.service.VotingService                : Gás estimado para adicionar o candidato 'Candidato Teste': 96875
+2025-06-16T06:50:31.774-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:50:31.774-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:50:31.774-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 125
+2025-06-16T06:50:31.775-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:50:31.775-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"eth_getTransactionCount","params":["0xb98b45e094d07926522b659bce5dd0d9eeab6d93","pending"],"id":4}
+2025-06-16T06:50:31.775-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> END POST (125-byte body)
+2025-06-16T06:50:31.779-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- 200 OK http://localhost:8545/ (2ms)
+2025-06-16T06:50:31.779-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json
+2025-06-16T06:50:31.779-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Date: Mon, 16 Jun 2025 09:50:31 GMT
+2025-06-16T06:50:31.779-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Connection: keep-alive
+2025-06-16T06:50:31.779-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Keep-Alive: timeout=5
+2025-06-16T06:50:31.780-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 40
+2025-06-16T06:50:31.780-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:50:31.780-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"id":4,"jsonrpc":"2.0","result":"0x1e"}
+2025-06-16T06:50:31.780-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- END HTTP (40-byte body)
+2025-06-16T06:50:31.804-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> POST http://localhost:8545/
+2025-06-16T06:50:31.806-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json; charset=utf-8
+2025-06-16T06:50:31.806-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 480
+2025-06-16T06:50:31.807-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:50:31.807-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"jsonrpc":"2.0","method":"eth_sendRawTransaction","params":["0xf8c91e84f46109008389544094dfa4475665f3718eed0a2fa9af3cff737bb3e20680b864985c64d00000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000f43616e64696461746f20546573746500000000000000000000000000000000001ba0f8a3a9af208df9eaa8c97ce0212130d8f1149a31dc5a11cc9ebaf0329af3ec1fa0780b8480d44ba9a5f9434fb0150c772d72435465d78c3e9675b9be12d012b958"],"id":5}
+2025-06-16T06:50:31.809-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : --> END POST (480-byte body)
+2025-06-16T06:50:31.815-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- 200 OK http://localhost:8545/ (4ms)
+2025-06-16T06:50:31.816-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Type: application/json
+2025-06-16T06:50:31.816-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Date: Mon, 16 Jun 2025 09:50:31 GMT
+2025-06-16T06:50:31.816-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Connection: keep-alive
+2025-06-16T06:50:31.817-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Keep-Alive: timeout=5
+2025-06-16T06:50:31.818-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : Content-Length: 1801
+2025-06-16T06:50:31.818-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : 
+2025-06-16T06:50:31.819-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : {"id":5,"jsonrpc":"2.0","error":{"message":"exceeds block gas limit","stack":"Error: exceeds block gas limit\n    at TransactionPool.<anonymous> (C:\\Program Files\\WindowsApps\\GanacheUI_2.7.1.0_x64__rb4352f0jd4m2\\app\\resources\\static\\node\\node_modules\\ganache\\dist\\node\\1.js:2:120454)\n    at TransactionPool.prepareTransaction (C:\\Program Files\\WindowsApps\\GanacheUI_2.7.1.0_x64__rb4352f0jd4m2\\app\\resources\\static\\node\\node_modules\\ganache\\dist\\node\\1.js:2:120796)\n    at TransactionManager.add (C:\\Program Files\\WindowsApps\\GanacheUI_2.7.1.0_x64__rb4352f0jd4m2\\app\\resources\\static\\node\\node_modules\\ganache\\dist\\node\\1.js:2:138284)\n    at Blockchain.queueTransaction (C:\\Program Files\\WindowsApps\\GanacheUI_2.7.1.0_x64__rb4352f0jd4m2\\app\\resources\\static\\node\\node_modules\\ganache\\dist\\node\\1.js:2:70776)\n    at EthereumApi.eth_sendRawTransaction (C:\\Program Files\\WindowsApps\\GanacheUI_2.7.1.0_x64__rb4352f0jd4m2\\app\\resources\\static\\node\\node_modules\\ganache\\dist\\node\\1.js:2:88213)\n    at EthereumApi.n.value (C:\\Program Files\\WindowsApps\\GanacheUI_2.7.1.0_x64__rb4352f0jd4m2\\app\\resources\\static\\node\\node_modules\\ganache\\dist\\node\\1.js:2:238968)\n    at Object.execute (C:\\Program Files\\WindowsApps\\GanacheUI_2.7.1.0_x64__rb4352f0jd4m2\\app\\resources\\static\\node\\node_modules\\ganache\\dist\\node\\1.js:2:165607)\n    at RequestCoordinator.<anonymous> (C:\\Program Files\\WindowsApps\\GanacheUI_2.7.1.0_x64__rb4352f0jd4m2\\app\\resources\\static\\node\\node_modules\\ganache\\dist\\node\\1.js:2:165421)\n    at C:\\Program Files\\WindowsApps\\GanacheUI_2.7.1.0_x64__rb4352f0jd4m2\\app\\resources\\static\\node\\node_modules\\ganache\\dist\\node\\1.js:2:165687\n    at new Promise (<anonymous>)","code":-32000}}
+2025-06-16T06:50:31.819-03:00 DEBUG 15592 --- [api-java-smart-contracts] [main] org.web3j.protocol.http.HttpService      : <-- END HTTP (1801-byte body)
+2025-06-16T06:50:31.825-03:00 ERROR 15592 --- [api-java-smart-contracts] [main] c.v.a.ApiJavaSmartContractsApplication   : Erro ao interagir com o contrato: JsonRpcError thrown with code -32000. Message: exceeds block gas limit
+
+org.web3j.protocol.exceptions.TransactionException: JsonRpcError thrown with code -32000. Message: exceeds block gas limit
+	at org.web3j.tx.Contract.executeTransaction(Contract.java:424) ~[core-4.10.0.jar:na]
+	at org.web3j.tx.Contract.executeTransaction(Contract.java:373) ~[core-4.10.0.jar:na]
+	at org.web3j.tx.Contract.executeTransaction(Contract.java:367) ~[core-4.10.0.jar:na]
+	at org.web3j.tx.Contract.executeTransaction(Contract.java:362) ~[core-4.10.0.jar:na]
+	at org.web3j.tx.Contract.lambda$executeRemoteCallTransaction$3(Contract.java:467) ~[core-4.10.0.jar:na]
+	at org.web3j.protocol.core.RemoteCall.send(RemoteCall.java:42) ~[core-4.10.0.jar:na]
+	at blockchain.api_java_smart_contracts.service.VotingService.adicionarCandidato(VotingService.java:95) ~[classes/:na]
+	at com.votacao.api.ApiJavaSmartContractsApplication.interagirComContrato(ApiJavaSmartContractsApplication.java:95) ~[classes/:na]
+	at com.votacao.api.ApiJavaSmartContractsApplication.run(ApiJavaSmartContractsApplication.java:78) ~[classes/:na]
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:791) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82) ~[spring-core-6.1.20.jar:6.1.20]
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60) ~[spring-core-6.1.20.jar:6.1.20]
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86) ~[spring-core-6.1.20.jar:6.1.20]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:799) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:790) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:775) ~[spring-boot-3.3.12.jar:3.3.12]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184) ~[na:na]
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596) ~[na:na]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:775) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:342) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1364) ~[spring-boot-3.3.12.jar:3.3.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1353) ~[spring-boot-3.3.12.jar:3.3.12]
+	at com.votacao.api.ApiJavaSmartContractsApplication.main(ApiJavaSmartContractsApplication.java:52) ~[classes/:na]
+
