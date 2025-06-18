@@ -28,35 +28,40 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Dependência principal do Web3j para interagir com a blockchain Ethereum -->
         <dependency>
             <groupId>org.web3j</groupId>
             <artifactId>core</artifactId>
             <version>${web3j.version}</version>
         </dependency>
 
+        <!-- Dependência para validação, usada geralmente com Spring Boot para DTOs -->
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
             <version>3.0.2</version>
         </dependency>
 
+        <!-- NOVO/ATUALIZADO: Dependências para SpringDoc OpenAPI (Swagger UI) -->
+        <!-- Isso irá gerar automaticamente a documentação da sua API e uma UI interativa -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.5.0</version>
         </dependency>
 
+        <!-- Dependência para JDBC, permite a conexão com bancos de dados relacionais -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
-        <!-- NOVO: Dependência para o driver JDBC do MySQL -->
-        <!-- Isso permite que o Spring Boot se conecte ao seu banco de dados MySQL -->
+        <!-- ATUALIZADO: Dependência para o driver JDBC do MySQL -->
+        <!-- Corrigido o GroupId conforme aviso do Maven (relocation) -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version> <!-- Adapte esta versão se necessário para sua versão MySQL/Spring Boot -->
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.33</version> <!-- Adapte esta versão se necessário -->
         </dependency>
 
     </dependencies>
@@ -68,6 +73,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
+            <!-- Plugin Web3j para gerar classes Java a partir de contratos Solidity/ABIs -->
             <plugin>
                 <groupId>org.web3j</groupId>
                 <artifactId>web3j-maven-plugin</artifactId>
@@ -82,19 +88,37 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <!-- Diretório onde estão os arquivos .sol (Solidity) para compilação -->
                     <soliditySourceFiles>
                         <directory>src/main/resources/contracts</directory>
                         <includes>
-                            <include>Voting.sol</include>
+                            <!-- CORREÇÃO AQUI: Garante que o plugin encontre o 'contractVoting.sol' -->
+                            <include>contractVoting.sol</include>
                         </includes>
                     </soliditySourceFiles>
-                    <!-- Esta configuração com <outputDir> é a que você está usando e parece estar funcionando agora -->
+                    <!-- Diretório onde estão os arquivos .abi para geração de classes Java -->
+                    <!-- Importante: Certifique-se de que APENAS os arquivos ABI estejam neste diretório -->
+                    <!-- O log anterior mostrou que 'Voting.json' foi processado. Se este é o ABI do seu contrato,
+                         mantenha-o aqui. Se o ABI gerado pelo 'contractVoting.sol' for 'contractVoting.json',
+                         então mude o include para 'contractVoting.json' e garanta que o 'solcjs' esteja configurado
+                         ou disponível no seu PATH para que o plugin compile o .sol para .json. -->
+                    <abiSourceFiles>
+                        <directory>src/main/resources/abi</directory>
+                        <includes>
+                            <!-- Mantendo 'Voting.json' conforme o log anterior. Ajuste se o nome do ABI for diferente. -->
+                            <include>Voting.json</include>
+                        </includes>
+                    </abiSourceFiles>
+                    <!-- Diretório de saída para as classes Java geradas pelo Web3j -->
                     <outputDir>${project.build.directory}/generated-sources/web3j</outputDir>
+                    <!-- Pacote Java para as classes de contrato geradas -->
                     <packageName>com.votacao.contracts</packageName>
+                    <!-- Formato de saída, neste caso, classes Java -->
                     <outputFormat>java</outputFormat>
                 </configuration>
             </plugin>
 
+            <!-- Plugin para adicionar o diretório de fontes geradas ao classpath do Maven -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -116,5 +140,8 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
+<!--
+    Este é o arquivo pom.xml para o projeto de API Java que interage com contratos inteligentes na blockchain Ethereum.
+    Ele inclui dependências essenciais, plugins para geração de código a partir de contratos Solidity e configuração
+    para documentação da API usando SpringDoc OpenAPI.-->
