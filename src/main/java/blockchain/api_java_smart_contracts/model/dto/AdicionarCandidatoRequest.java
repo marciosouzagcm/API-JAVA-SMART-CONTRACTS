@@ -1,10 +1,23 @@
 package blockchain.api_java_smart_contracts.model.dto;
 
-import java.util.Objects; // Importar java.util.Objects para os métodos equals e hashCode
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-public class AdicionarCandidatoRequest { // Nome da classe em PascalCase
+public class AdicionarCandidatoRequest {
 
+    @NotBlank(message = "O nome do candidato não pode ser vazio")
+    @Size(max = 100, message = "O nome do candidato não pode exceder 100 caracteres")
     private String nome;
+
+    @Size(max = 500, message = "A descrição do candidato não pode exceder 500 caracteres")
+    private String descricao; // Adicionado para persistência no DB
+
+    public AdicionarCandidatoRequest() {}
+
+    public AdicionarCandidatoRequest(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
+    }
 
     public String getNome() {
         return nome;
@@ -14,32 +27,11 @@ public class AdicionarCandidatoRequest { // Nome da classe em PascalCase
         this.nome = nome;
     }
 
-    // Construtor vazio (necessário para desserialização do JSON, por exemplo, pelo Spring/Jackson)
-    public AdicionarCandidatoRequest() {
+    public String getDescricao() {
+        return descricao;
     }
 
-    // Construtor com todos os argumentos
-    public AdicionarCandidatoRequest(String nome) {
-        this.nome = nome;
-    }
-
-    @Override
-    public String toString() {
-        return "AdicionarCandidatoRequest{" +
-               "nome='" + nome + '\'' +
-               '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AdicionarCandidatoRequest that = (AdicionarCandidatoRequest) o;
-        return Objects.equals(nome, that.nome);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nome);
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

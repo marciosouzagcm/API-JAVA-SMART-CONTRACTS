@@ -14,16 +14,21 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
 // Ela demonstra como chamadas remotas para funções do contrato poderiam ser estruturadas.
 class votingContract {
 
-    // Método estático que simula a chamada para a função 'autorizarEleitor' do contrato inteligente.
-    // Recebe o endereço do eleitor (String) e um valor booleano indicando se ele deve ser autorizado.
-    // Atualmente, lança uma UnsupportedOperationException, indicando que a implementação real não está presente aqui.
+    // Método estático que simula a chamada para a função 'autorizarEleitor' do
+    // contrato inteligente.
+    // Recebe o endereço do eleitor (String) e um valor booleano indicando se ele
+    // deve ser autorizado.
+    // Atualmente, lança uma UnsupportedOperationException, indicando que a
+    // implementação real não está presente aqui.
     static RemoteCall<TransactionReceipt> autorizarEleitor(String eleitorAddress, boolean b) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    // Método estático que simula a chamada para a função 'votar' do contrato inteligente.
+    // Método estático que simula a chamada para a função 'votar' do contrato
+    // inteligente.
     // Recebe o ID do candidato (BigInteger) para o qual o voto será registrado.
-    // Atualmente, lança uma UnsupportedOperationException, indicando que a implementação real não está presente aqui.
+    // Atualmente, lança uma UnsupportedOperationException, indicando que a
+    // implementação real não está presente aqui.
     static RemoteCall<TransactionReceipt> votar(BigInteger valueOf) {
         throw new UnsupportedOperationException("Not supported yet.");
     }

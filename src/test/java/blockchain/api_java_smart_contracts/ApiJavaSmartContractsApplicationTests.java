@@ -1,7 +1,8 @@
 package blockchain.api_java_smart_contracts;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import com.votacao.api.ApiJavaSmartContractsApplication;
+import com.votacao.api.SpringBootTest;
 
 @SpringBootTest(classes = ApiJavaSmartContractsApplication.class) // Garante que sua aplicação principal seja carregada
 class ApiJavaSmartContractsApplicationTests {

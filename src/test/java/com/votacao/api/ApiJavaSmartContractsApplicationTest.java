@@ -1,7 +1,6 @@
 package com.votacao.api;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = ApiJavaSmartContractsApplication.class) // Use a classe principal da sua aplicação
 public class ApiJavaSmartContractsApplicationTest {
@@ -16,6 +15,6 @@ public class ApiJavaSmartContractsApplicationTest {
 
         public ApiJavaSmartContractsApplication() {
         }
-    
+
     }
 }

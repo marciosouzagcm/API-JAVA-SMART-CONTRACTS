@@ -1,72 +1,63 @@
 package blockchain.api_java_smart_contracts.model;
 
-import java.util.Objects;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
+/**
+ * Entidade JPA para representar um Eleitor.
+ * Mapeia para a tabela 'eleitores' no banco de dados.
+ */
+@Entity
+@Table(name = "eleitores")
 public class Eleitor {
 
-    private String endereco; // Endereço Ethereum do eleitor
-    private boolean jaVotou; // Indica se o eleitor já exerceu seu voto
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    // Se o contrato tiver uma forma de "autorizar" eleitores e você quiser expor isso
-    // private boolean autorizado;
+    @NotBlank(message = "O nome do eleitor é obrigatório")
+    private String nome;
 
+    @NotBlank(message = "O CPF é obrigatório")
+    @Pattern(regexp = "\\d{11}", message = "O CPF deve conter 11 dígitos numéricos")
+    private String cpf;
+
+    // Construtor padrão necessário para JPA
     public Eleitor() {
-        // Construtor padrão
     }
 
-    public Eleitor(String endereco, boolean jaVotou) {
-        this.endereco = endereco;
-        this.jaVotou = jaVotou;
+    public Eleitor(String nome, String cpf) {
+        this.nome = nome;
+        this.cpf = cpf;
     }
 
-    public String getEndereco() {
-        return endereco;
+    // Getters e Setters
+    public Long getId() {
+        return id;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public boolean getJaVotou() { // O nome do getter para boolean geralmente é isJaVotou()
-        return jaVotou;
+    public String getNome() {
+        return nome;
     }
 
-    public void setJaVotou(boolean jaVotou) {
-        this.jaVotou = jaVotou;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    /*
-    // Exemplo de getter/setter para 'autorizado' se necessário
-    public boolean isAutorizado() {
-        return autorizado;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setAutorizado(boolean autorizado) {
-        this.autorizado = autorizado;
-    }
-    */
-
-    @Override
-    public String toString() {
-        return "Eleitor{" +
-               "endereco='" + endereco + '\'' +
-               ", jaVotou=" + jaVotou +
-               // (autorizado ? ", autorizado=" + autorizado : "") + // Adicionar se o campo for usado
-               '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Eleitor eleitor = (Eleitor) o;
-        return jaVotou == eleitor.jaVotou && Objects.equals(endereco, eleitor.endereco);
-        // && (autorizado == eleitor.autorizado) // Adicionar se o campo for usado
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(endereco, jaVotou);
-        // , autorizado // Adicionar se o campo for usado
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 }

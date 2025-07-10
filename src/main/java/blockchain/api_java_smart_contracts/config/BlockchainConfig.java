@@ -14,9 +14,8 @@ import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.gas.DefaultGasProvider;
 import org.web3j.tx.gas.ContractGasProvider;
 
-// IMPORTANTE: Certifique-se de que este import está correto para a sua classe Voting gerada pelo Web3j.
-// Por exemplo, se o Web3j gerou a classe dentro de 'com.votacao.contracts', este caminho está certo.
-import com.votacao.contracts.Voting;
+// IMPORTAÇÃO CORRIGIDA: Importa a classe gerada pelo Web3j
+import com.votacao.contracts.ContractVoting;
 
 @Configuration // Esta anotação é CRÍTICA: informa ao Spring que esta classe define beans
 public class BlockchainConfig {
@@ -87,17 +86,17 @@ public class BlockchainConfig {
     }
 
     /**
-     * Define o bean do contrato Voting.
+     * Define o bean do contrato ContractVoting.
      * Ele injeta as dependências Web3j, Credentials e GasProvider necessárias para interagir com o contrato.
-     * É crucial que 'Voting.load' seja chamado na classe gerada pelo Web3j, não em um stub.
+     * É crucial que 'ContractVoting.load' seja chamado na classe gerada pelo Web3j.
      */
     @Bean
     @Qualifier("votingContract")
-    public Voting votingContract(@Qualifier("web3jConnection") Web3j web3j, // Injeta o Web3j com o qualificador correto
-                                 @Qualifier("credentialsContract") Credentials credentials, // Injeta as credenciais
-                                 ContractGasProvider contractGasProvider) { // Injeta o provedor de gas
-        // Aqui, usamos o método estático load da classe Voting gerada pelo Web3j.
-        // O endereço do contrato é injetado via @Value.
-        return Voting.load(contractAddress, web3j, credentials, contractGasProvider);
+    // TIPO DE RETORNO CORRIGIDO: De Voting para ContractVoting
+    public ContractVoting votingContract(@Qualifier("web3jConnection") Web3j web3j, // Injeta o Web3j com o qualificador correto
+                                         @Qualifier("credentialsContract") Credentials credentials, // Injeta as credenciais
+                                         ContractGasProvider contractGasProvider) { // Injeta o provedor de gas
+        // CHAMADA DO MÉTODO LOAD CORRIGIDA: De Voting.load para ContractVoting.load
+        return ContractVoting.load(contractAddress, web3j, credentials, contractGasProvider);
     }
 }

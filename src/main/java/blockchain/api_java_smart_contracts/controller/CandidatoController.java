@@ -1,150 +1,152 @@
 package blockchain.api_java_smart_contracts.controller;
 
-import java.math.BigInteger;
-import java.util.concurrent.ExecutionException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import blockchain.api_java_smart_contracts.model.Candidato;
-import blockchain.api_java_smart_contracts.model.dto.AdicionarCandidatoRequest;
-import blockchain.api_java_smart_contracts.model.dto.AutorizarEleitorRequest;
-import blockchain.api_java_smart_contracts.model.dto.EleitorResponse;
-import blockchain.api_java_smart_contracts.model.dto.VotoRequest;
-import blockchain.api_java_smart_contracts.service.BlockchainService;
+import blockchain.api_java_smart_contracts.repository.CandidatoRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType; // Adicione esta importação
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Controlador REST para gerenciar operações relacionadas a Candidatos.
+ * Expõe endpoints para registrar, listar, buscar e atualizar candidatos.
+ */
 @RestController
-@RequestMapping("/api") // Prefixo para todos os endpoints desta classe
+@RequestMapping("/api/candidatos")
+@Tag(name = "Candidatos", description = "Gerenciamento de Candidatos para votação")
 public class CandidatoController {
 
     @Autowired
-    private BlockchainService blockchainService;
+    private CandidatoRepository candidatoRepository;
 
     /**
-     * Adiciona um novo candidato ao sistema de votação.
-     * Recebe o nome do candidato no corpo da requisição via DTO.
-     *
-     * @param request DTO contendo o nome do candidato.
-     * @return ResponseEntity com mensagem de sucesso ou erro.
+     * Registra um novo candidato no sistema.
+     * @param candidato O objeto Candidato a ser registrado.
+     * @return ResponseEntity com o candidato salvo e status 201 CREATED.
      */
-    @PostMapping("/candidatos")
-    public ResponseEntity<String> adicionarCandidato(@Valid @RequestBody AdicionarCandidatoRequest request) {
-        try {
-            // Chama o método para adicionar candidato e aguarda a conclusão
-            blockchainService.adicionarCandidato(request.getNome()).get();
-            return ResponseEntity.ok("Candidato '" + request.getNome() + "' adicionado com sucesso.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erro ao adicionar candidato: " + e.getMessage());
-        }
+    @Operation(summary = "Registrar um novo candidato",
+                description = "Cria um novo registro de candidato no banco de dados.",
+                requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Dados do Candidato a ser registrado",
+                    required = true,
+                    content = @Content(schema = @Schema(implementation = Candidato.class))
+                ),
+                responses = {
+                    @ApiResponse(responseCode = "201", description = "Candidato registrado com sucesso",
+                                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, // CORRIGIDO AQUI
+                                                    schema = @Schema(implementation = Candidato.class))),
+                    @ApiResponse(responseCode = "400", description = "Requisição inválida (dados ausentes ou mal formatados)"),
+                    @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+                })
+    @PostMapping
+    public ResponseEntity<Candidato> registrarCandidato(@Valid @RequestBody Candidato candidato) {
+        Candidato novoCandidato = candidatoRepository.save(candidato);
+        return new ResponseEntity<>(novoCandidato, HttpStatus.CREATED);
     }
 
     /**
-     * Obtém os detalhes de um candidato específico pelo seu ID.
-     *
-     * @param id ID do candidato.
-     * @return ResponseEntity com o objeto Candidato ou status 404 Not Found.
+     * Lista todos os candidatos registrados.
+     * @return ResponseEntity com uma lista de candidatos e status 200 OK.
      */
-    @GetMapping("/candidatos/{id}")
-    public ResponseEntity<?> obterCandidato(@PathVariable BigInteger id) {
-        try {
-            Candidato candidato = blockchainService.obterCandidato(id).get();
-            // Verifica se o candidato realmente existe com base nos valores retornados do
-            // contrato
-            // (Ex: ID maior que zero e nome não vazio para considerar existente)
-            if (candidato != null && candidato.getId().compareTo(BigInteger.ZERO) > 0
-                    && !candidato.getNome().isEmpty()) {
-                return ResponseEntity.ok(candidato);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            return ResponseEntity.status(500).body("Erro interno: Operação interrompida ao obter candidato.");
-        } catch (ExecutionException e) {
-            Throwable cause = e.getCause(); // Tenta obter a causa real da exceção
-            String errorMessage = "Erro ao obter candidato: " + (cause != null ? cause.getMessage() : e.getMessage());
-            return ResponseEntity.badRequest().body(errorMessage);
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Erro inesperado ao obter candidato: " + e.getMessage());
-        }
+    @Operation(summary = "Listar todos os candidatos",
+                description = "Retorna uma lista de todos os candidatos registrados no sistema.",
+                responses = {
+                    @ApiResponse(responseCode = "200", description = "Lista de candidatos recuperada com sucesso",
+                                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, // CORRIGIDO AQUI
+                                                    schema = @Schema(implementation = Candidato.class))),
+                    @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+                })
+    @GetMapping
+    public ResponseEntity<List<Candidato>> listarCandidatos() {
+        List<Candidato> candidatos = candidatoRepository.findAll();
+        return new ResponseEntity<>(candidatos, HttpStatus.OK);
     }
 
     /**
-     * Registra um voto para um candidato.
-     * Recebe o ID do candidato no corpo da requisição via DTO.
-     *
-     * @param request DTO contendo o ID do candidato.
-     * @return ResponseEntity com mensagem de sucesso ou erro.
+     * Busca um candidato pelo ID.
+     * @param id O ID do candidato.
+     * @return ResponseEntity com o candidato encontrado e status 200 OK, ou 404 NOT FOUND.
      */
-    @PostMapping("/votos") // Endpoint mais RESTful para registrar votos
-    public ResponseEntity<String> votar(@Valid @RequestBody VotoRequest request) {
-        try {
-            blockchainService.votar(request.getIdCandidato()).get();
-            return ResponseEntity
-                    .ok("Voto registrado com sucesso para o candidato ID " + request.getIdCandidato() + ".");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erro ao votar: " + e.getMessage());
-        }
+    @Operation(summary = "Buscar candidato por ID",
+                description = "Retorna um candidato específico pelo seu ID.",
+                responses = {
+                    @ApiResponse(responseCode = "200", description = "Candidato encontrado com sucesso",
+                                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, // CORRIGIDO AQUI
+                                                    schema = @Schema(implementation = Candidato.class))),
+                    @ApiResponse(responseCode = "404", description = "Candidato não encontrado"),
+                    @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+                })
+    @GetMapping("/{id}")
+    public ResponseEntity<Candidato> buscarCandidatoPorId(@PathVariable Long id) {
+        Optional<Candidato> candidato = candidatoRepository.findById(id);
+        return candidato.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     /**
-     * Obtém o total de candidatos registrados no sistema.
-     *
-     * @return ResponseEntity com o número total de candidatos.
+     * Atualiza um candidato existente.
+     * @param id O ID do candidato a ser atualizado.
+     * @param candidatoAtualizado O objeto Candidato com os dados atualizados.
+     * @return ResponseEntity com o candidato atualizado e status 200 OK, ou 404 NOT FOUND.
      */
-    @GetMapping("/candidatos/total")
-    public ResponseEntity<BigInteger> obterTotalDeCandidatos() {
-        try {
-            // Agora o método retorna BigInteger diretamente
-            BigInteger total = (BigInteger) blockchainService.obterTotalDeCandidatos().get();
-            return ResponseEntity.ok(total);
-        } catch (Exception e) {
-            // Em caso de erro, retorna 500 Internal Server Error e um valor padrão
-            return ResponseEntity.status(500).body(BigInteger.ZERO);
-        }
+    @Operation(summary = "Atualizar um candidato existente",
+                description = "Atualiza os dados de um candidato existente pelo seu ID.",
+                requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Novos dados do Candidato",
+                    required = true,
+                    content = @Content(schema = @Schema(implementation = Candidato.class))
+                ),
+                responses = {
+                    @ApiResponse(responseCode = "200", description = "Candidato atualizado com sucesso",
+                                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, // CORRIGIDO AQUI
+                                                    schema = @Schema(implementation = Candidato.class))),
+                    @ApiResponse(responseCode = "404", description = "Candidato não encontrado"),
+                    @ApiResponse(responseCode = "400", description = "Requisição inválida"),
+                    @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+                })
+    @PutMapping("/{id}")
+    public ResponseEntity<Candidato> atualizarCandidato(@PathVariable Long id, @Valid @RequestBody Candidato candidatoAtualizado) {
+        return candidatoRepository.findById(id)
+                .map(candidato -> {
+                    // Atualiza os campos nome e descricao
+                    candidato.setNome(candidatoAtualizado.getNome());
+                    candidato.setDescricao(candidatoAtualizado.getDescricao());
+                    Candidato salvo = candidatoRepository.save(candidato);
+                    return new ResponseEntity<>(salvo, HttpStatus.OK);
+                })
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     /**
-     * Autoriza ou desautoriza um eleitor no sistema de votação.
-     * Recebe o endereço do eleitor e o status de autorização via DTO.
-     *
-     * @param request DTO contendo o endereço do eleitor e o status de autorização.
-     * @return ResponseEntity com mensagem de sucesso ou erro.
+     * Exclui um candidato pelo ID.
+     * @param id O ID do candidato a ser excluído.
+     * @return ResponseEntity com status 204 NO CONTENT se a exclusão for bem-sucedida, ou 404 NOT FOUND.
      */
-    @PostMapping("/eleitores/autorizar") // Endpoint mais RESTful para gerenciar eleitores
-    public ResponseEntity<String> autorizarEleitor(@Valid @RequestBody AutorizarEleitorRequest request) {
-        try {
-            blockchainService.autorizarEleitor(request.getEnderecoEleitor(), request.isAutorizado()).get();
-            String status = request.isAutorizado() ? "autorizado" : "desautorizado";
-            return ResponseEntity
-                    .ok("Eleitor com endereço '" + request.getEnderecoEleitor() + "' " + status + " com sucesso.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erro ao autorizar eleitor: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Verifica se um determinado eleitor já votou.
-     *
-     * @param endereco Endereço Ethereum do eleitor.
-     * @return ResponseEntity com o DTO EleitorResponse indicando se o eleitor votou
-     *         ou não.
-     */
-    @GetMapping("/eleitores/{endereco}/votou") // Endpoint mais RESTful para verificar status de eleitor
-    public ResponseEntity<EleitorResponse> verificarSeVotou(@PathVariable String endereco) {
-        try {
-            Boolean votou = blockchainService.verificarSeVotou(endereco).get();
-            return ResponseEntity.ok(new EleitorResponse(endereco, votou));
-        } catch (Exception e) {
-            // Em caso de erro, retorna 500 Internal Server Error e um DTO com status falso
-            return ResponseEntity.status(500).body(new EleitorResponse(endereco, false));
+    @Operation(summary = "Excluir um candidato",
+                description = "Remove um candidato do sistema pelo seu ID.",
+                responses = {
+                    // Para 204 No Content, o 'content' é opcional pois não há corpo de resposta esperado.
+                    @ApiResponse(responseCode = "204", description = "Candidato excluído com sucesso"),
+                    @ApiResponse(responseCode = "404", description = "Candidato não encontrado"),
+                    @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+                })
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirCandidato(@PathVariable Long id) {
+        if (candidatoRepository.existsById(id)) {
+            candidatoRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

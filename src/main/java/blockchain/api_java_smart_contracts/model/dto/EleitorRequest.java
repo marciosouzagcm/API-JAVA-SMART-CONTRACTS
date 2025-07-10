@@ -1,13 +1,15 @@
 package blockchain.api_java_smart_contracts.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import java.util.Objects;
 
 public class EleitorRequest {
 
+    @NotBlank(message = "O endereço do eleitor não pode ser vazio.")
     private String enderecoEleitor; // Endereço Ethereum do eleitor
 
     public EleitorRequest() {
-        // Construtor padrão vazio
+        // Construtor padrão vazio para desserialização
     }
 
     public EleitorRequest(String enderecoEleitor) {

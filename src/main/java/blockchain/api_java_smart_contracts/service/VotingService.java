@@ -1,8 +1,8 @@
 package blockchain.api_java_smart_contracts.service;
 
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,181 +11,201 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.web3j.abi.FunctionEncoder;
-import org.web3j.abi.datatypes.Function;
-import org.web3j.abi.datatypes.Utf8String;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
-import org.web3j.protocol.core.methods.request.Transaction;
-import org.web3j.protocol.core.methods.response.EthEstimateGas;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.core.methods.response.Web3ClientVersion;
-import org.web3j.tuples.generated.Tuple3;
-import org.web3j.tx.gas.ContractGasProvider; // Importa a interface correta
+import org.web3j.tx.gas.ContractGasProvider;
 
 import com.votacao.api.exception.EleitorException;
-import com.votacao.contracts.Voting; // Importação da classe Voting gerada pelo Web3j
-
-import blockchain.api_java_smart_contracts.model.Candidato;
+import com.votacao.contracts.ContractVoting; // Classe gerada pelo Web3j
 
 @Service
-@SuppressWarnings("UnnecessaryReturnStatement") // Considerar remover esta supressão se não houver retornos
-                                                // desnecessários
+// Removendo UnnecessaryReturnStatement porque pode não ser aplicável após as remoções
+@SuppressWarnings("unused") // Mantendo "unused" para métodos de DB que podem não ser chamados diretamente na demo
 public class VotingService {
 
-    // Campos necessários para interações e carregamento dinâmico
-    private final Web3j web3j; // Para operações gerais do Web3j (ex: verificar versão, estimar gás)
-    private final String contractAddress; // Endereço do contrato para carregamentos dinâmicos
-    private final ContractGasProvider gasProvider; // Provedor de gás (interface) para carregamentos dinâmicos
-    private final Credentials adminCredentials; // Credenciais do administrador, usadas para operações que precisam de
-                                                // 'fromAddress'
-    private final Voting votingContract; // A instância do contrato Voting para operações do administrador (já
-                                         // configurada via Spring)
+    private final Web3j web3j;
+    private final String contractAddress;
+    private final ContractGasProvider gasProvider;
+    private final Credentials adminCredentials;
+    private final ContractVoting votingContract;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate; // Para interações com o banco de dados
+    @Autowired(required = false)
+    private JdbcTemplate jdbcTemplate; // Removido 'final' para permitir @Autowired
 
     private static final Logger LOGGER = Logger.getLogger(VotingService.class.getName());
 
     @Autowired
     public VotingService(
-            // Injeção da conexão Web3j (qualificador 'web3jConnection' da BlockchainConfig)
             @Qualifier("web3jConnection") Web3j web3jConnection,
-            // Injeção do endereço do contrato (valor do application.properties)
             @Value("${blockchain.voting.contract-address}") String contractAddressValue,
-            // Injeção das credenciais do administrador (qualificador 'credentialsContract'
-            // da BlockchainConfig)
             @Qualifier("credentialsContract") Credentials credentialsContract,
-            // Injeção do provedor de gás (bean ContractGasProvider da BlockchainConfig)
-            ContractGasProvider injectedGasProvider, // O Spring pode injetar DefaultGasProvider se ele for o único
-                                                     // ContractGasProvider
-            // Injeção da instância do contrato Voting já carregada e configurada
-            // (qualificador 'votingContract' da BlockchainConfig)
-            @Qualifier("votingContract") Voting adminVotingContract) {
+            ContractGasProvider injectedGasProvider,
+            @Qualifier("votingContract") ContractVoting adminVotingContract) {
 
         this.web3j = web3jConnection;
         this.contractAddress = contractAddressValue;
-        this.adminCredentials = credentialsContract; // Campo para as credenciais do administrador
-        this.gasProvider = injectedGasProvider; // Campo para o provedor de gás
-        this.votingContract = adminVotingContract; // Campo para a instância do contrato Voting
-
-        // Não é mais necessário carregar o contrato aqui, pois ele já é injetado.
-        // this.votingContract = Voting.load(contractAddress, web3j, credentials,
-        // gasProvider);
+        this.adminCredentials = credentialsContract;
+        this.gasProvider = injectedGasProvider;
+        this.votingContract = adminVotingContract;
     }
 
-    /**
-     * Chama a função `adicionarCandidato` do smart contract `Voting`.
-     */
+    // --- MÉTODOS AJUSTADOS/REMOVIDOS BASEADOS NO CONTRACTVOTING.SOL ---
+
+    // REMOVIDO: O contrato Solidity não tem mais 'adicionarCandidato'.
+    // A gestão de candidatos (nomes, IDs) deve ser feita no seu banco de dados.
+    /*
     public String adicionarCandidato(String nome) throws Exception {
-        // A estimativa de gás é útil para pré-verificar custos.
-        // 'adminCredentials.getAddress()' é usado para o campo 'from' da transação de
-        // estimativa.
-        Function function = new Function(
-                "adicionarCandidato", // Nome da função Solidity (minúscula, conforme o gerado)
-                Arrays.asList(new Utf8String(nome)),
-                Collections.emptyList());
-        String encodedFunction = FunctionEncoder.encode(function);
-
-        Transaction ethCallTransaction = Transaction.createEthCallTransaction(
-                adminCredentials.getAddress(), // Usamos as credenciais do administrador para o "from"
-                contractAddress,
-                encodedFunction);
-        EthEstimateGas estimateGas = web3j.ethEstimateGas(ethCallTransaction).sendAsync().get();
-
-        if (estimateGas.hasError()) {
-            throw new Exception("Erro ao estimar o gas: " + estimateGas.getError().getMessage());
-        }
-        BigInteger estimatedGas = estimateGas.getAmountUsed();
-        LOGGER.log(Level.INFO, "Gás estimado para adicionar o candidato '" + nome + "': " + estimatedGas);
-
-        // Executa a transação com o método gerado (adicionarCandidato) da instância do
-        // contrato injetada.
-        TransactionReceipt receipt = votingContract.adicionarCandidato(nome).send();
-        return receipt.getTransactionHash();
+        // Implementação original removida pois a funcionalidade não está no contrato Solidity
+        // Você precisará gerenciar candidatos no seu DB e apenas usar o ID para votar.
+        return "Funcionalidade de adicionar candidato movida para gerenciamento off-chain.";
     }
+    */
 
-    /**
-     * Chama a função `autorizarEleitor` do smart contract `Voting` para autorizar
-     * um eleitor.
-     */
+    // REMOVIDO: O contrato Solidity não tem mais 'autorizarEleitor'.
+    // A autorização é feita implicitamente pela assinatura do trustedSigner no método 'votar'.
+    /*
     public String autorizarEleitor(String eleitorAddress) throws Exception {
-        // Usa o método gerado: autorizarEleitor
-        TransactionReceipt receipt = votingContract.autorizarEleitor(eleitorAddress, true).send();
-        return receipt.getTransactionHash();
+        // Implementação original removida pois a funcionalidade não está no contrato Solidity
+        return "Funcionalidade de autorizar eleitor movida para autenticação por assinatura.";
     }
+    */
 
     /**
-     * Chama a função `votar` do smart contract `Voting` usando as credenciais
-     * padrão do administrador.
+     * Obtém a lista de todos os candidatos e suas contagens de votos do contrato.
+     * ATENÇÃO: O contrato NÃO ARMAZENA os nomes dos candidatos.
+     * Este método agora busca os votos para IDs de candidatos, supondo que os IDs
+     * são gerenciados externamente (ex: em um banco de dados).
+     * Retorna uma lista de pares (ID do Candidato, Contagem de Votos).
+     * Se você precisa dos nomes, eles devem vir do seu banco de dados.
      */
-    public String votar(Long idCandidato) throws Exception {
-        // Usa o método gerado: votar
-        TransactionReceipt receipt = votingContract.votar(BigInteger.valueOf(idCandidato)).send();
-        return receipt.getTransactionHash();
-    }
-
-    /**
-     * Chama a função `votar` do smart contract `Voting` usando credenciais
-     * específicas de um eleitor.
-     */
-    public String votar(Long idCandidato, String eleitorPrivateKey) throws Exception {
-        // Cria novas credenciais para o eleitor específico
-        Credentials eleitorCredentials = Credentials.create(eleitorPrivateKey);
-        // Carrega uma NOVA instância do contrato Voting com as credenciais do eleitor e
-        // o provedor de gás injetado.
-        Voting eleitorVotingContract = Voting.load(contractAddress, web3j, eleitorCredentials, gasProvider);
-
-        // Agora, o método 'send()' retorna diretamente TransactionReceipt, não Object.
-        TransactionReceipt receipt = eleitorVotingContract.votar(BigInteger.valueOf(idCandidato)).send();
-        return receipt.getTransactionHash();
-    }
-
-    /**
-     * Chama a função `obterCandidato` do smart contract `Voting` para obter
-     * informações de um candidato.
-     */
-    public Candidato obterCandidato(Long id) {
+    public List<VotoCandidatoDTO> obterVotosDosCandidatosExistentes(List<BigInteger> candidateIdsFromDB) throws Exception {
+        LOGGER.log(Level.INFO, "Iniciando a busca por votos de candidatos na blockchain.");
+        List<VotoCandidatoDTO> resultados = new ArrayList<>();
         try {
-            // Usa o método gerado: obterCandidato
-            Tuple3<BigInteger, String, BigInteger> result = votingContract.obterCandidato(BigInteger.valueOf(id))
-                    .send();
-            BigInteger candidatoId = result.getValue1();
-            String nome = result.getValue2();
-            BigInteger contagemDeVotos = result.getValue3();
-            return new Candidato(candidatoId, nome, contagemDeVotos);
+            for (BigInteger idCandidato : candidateIdsFromDB) {
+                // CHAMADA DO MÉTODO CORRIGIDA: De candidates para getCandidateVotes
+                BigInteger votos = votingContract.getCandidateVotes(idCandidato).send();
+                resultados.add(new VotoCandidatoDTO(idCandidato, votos));
+                LOGGER.log(Level.INFO, "ID Candidato {0}: {1} votos", new Object[] { idCandidato, votos });
+            }
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Erro ao obter informações do candidato", e);
-            throw new RuntimeException("Erro ao obter informações do candidato: " + e.getMessage(), e);
+            LOGGER.log(Level.SEVERE, "Erro ao obter votos dos candidatos: {0}", e.getMessage());
+            throw e;
+        }
+        return resultados;
+    }
+
+    // DTO auxiliar para retornar os votos, já que o nome do candidato não está no contrato
+    public static class VotoCandidatoDTO {
+        private BigInteger idCandidato;
+        private BigInteger votos;
+
+        public VotoCandidatoDTO(BigInteger idCandidato, BigInteger votos) {
+            this.idCandidato = idCandidato;
+            this.votos = votos;
+        }
+
+        public BigInteger getIdCandidato() { return idCandidato; }
+        public BigInteger getVotos() { return votos; }
+    }
+
+
+    /**
+     * Chama a função `votar` do smart contract `ContractVoting`.
+     * A assinatura do método corresponde à do contrato Solidity.
+     *
+     * @param idCandidato O ID do candidato em quem votar.
+     * @param eleitorAddress O endereço Ethereum do eleitor.
+     * @param nonce O nonce da transação, usado para evitar ataques de replay.
+     * @param signedMessageHash O hash da mensagem assinada pelo trustedSigner.
+     * @param signature A assinatura digital do trustedSigner.
+     */
+    public String votar(BigInteger idCandidato, String eleitorAddress, BigInteger nonce, byte[] signedMessageHash, byte[] signature) throws Exception {
+        LOGGER.log(Level.INFO, "Registrando voto para o candidato de índice: {0} pelo eleitor: {1}",
+                new Object[]{idCandidato, eleitorAddress});
+        // CHAMADA DO MÉTODO CORRIGIDA: Nome do método `votar` no contrato.
+        TransactionReceipt receipt = votingContract.votar(idCandidato, eleitorAddress, nonce, signedMessageHash, signature).send();
+        LOGGER.log(Level.INFO, "Voto para {0} registrado. Hash da Transação: {1}",
+                new Object[] { idCandidato, receipt.getTransactionHash() });
+        return receipt.getTransactionHash();
+    }
+
+    /**
+     * Sobrecarga do método `votar` para quando as credenciais do eleitor
+     * são passadas como chave privada, e a transação é enviada usando estas credenciais.
+     *
+     * @param idCandidato O ID do candidato em quem votar.
+     * @param eleitorPrivateKey A chave privada do eleitor para assinar a transação.
+     * @param eleitorAddress O endereço Ethereum do eleitor.
+     * @param nonce O nonce da transação, usado para evitar ataques de replay.
+     * @param signedMessageHash O hash da mensagem assinada pelo trustedSigner.
+     * @param signature A assinatura digital do trustedSigner.
+     */
+    public String votar(BigInteger idCandidato, String eleitorPrivateKey, String eleitorAddress, BigInteger nonce, byte[] signedMessageHash, byte[] signature) throws Exception {
+        LOGGER.log(Level.INFO, "Registrando voto para o candidato de índice {0} com credenciais específicas do eleitor: {1}.",
+                new Object[]{idCandidato, eleitorAddress});
+        Credentials eleitorCredentials = Credentials.create(eleitorPrivateKey);
+        // CARREGANDO CONTRATO COM AS CREDENCIAIS DO ELEITOR
+        ContractVoting eleitorVotingContract = ContractVoting.load(contractAddress, web3j, eleitorCredentials, gasProvider);
+
+        // CHAMADA DO MÉTODO CORRIGIDA: Nome do método `votar` no contrato.
+        TransactionReceipt receipt = eleitorVotingContract.votar(idCandidato, eleitorAddress, nonce, signedMessageHash, signature).send();
+        LOGGER.log(Level.INFO, "Voto para {0} registrado. Hash da Transação: {1}",
+                new Object[] { idCandidato, receipt.getTransactionHash() });
+        return receipt.getTransactionHash();
+    }
+
+    /**
+     * Obtém a contagem de votos de um candidato específico diretamente da blockchain.
+     * Nome do método ajustado para `getCandidateVotes`.
+     */
+    public BigInteger obterVotos(BigInteger candidateIndex) throws Exception {
+        LOGGER.log(Level.INFO, "Buscando votos para o candidato de índice: {0}", candidateIndex);
+        try {
+            // CHAMADA DO MÉTODO CORRIGIDA: De candidates para getCandidateVotes
+            BigInteger votes = votingContract.getCandidateVotes(candidateIndex).send();
+            LOGGER.log(Level.INFO, "Votos obtidos para o candidato {0}: {1}", new Object[] { candidateIndex, votes });
+            return votes;
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Erro ao obter votos para o candidato de índice '{0}': {1}",
+                    new Object[] { candidateIndex, e.getMessage() });
+            throw e;
         }
     }
 
     /**
-     * Método para autorizar um eleitor, verificando suas credenciais em um banco de
-     * dados.
+     * Método para autorizar um eleitor, verificando suas credenciais em um banco de dados.
+     * ATENÇÃO: A lógica de autorização no contrato foi alterada para assinaturas.
+     * Este método pode ser adaptado para *verificar* credenciais no DB e depois
+     * preparar os dados para o método `votar` com assinatura.
+     * Por enquanto, lança exceção, pois o contrato não tem um método `autorizarEleitor` direto.
      */
     public String autorizarEleitorComCredenciais(String endereco, String usuario, String senha)
             throws EleitorException {
+        if (jdbcTemplate == null) {
+            LOGGER.log(Level.WARNING, "JdbcTemplate não está configurado. Não é possível verificar credenciais no DB.");
+            throw new EleitorException("Serviço de verificação de credenciais não disponível.");
+        }
         if (verificarCredenciais(usuario, senha)) {
-            try {
-                return autorizarEleitor(endereco); // Este método já chama o contrato Voting
-            } catch (Exception e) {
-                LOGGER.log(Level.SEVERE, "Erro ao autorizar o eleitor", e);
-                throw new RuntimeException("Erro ao autorizar o eleitor: " + e.getMessage(), e);
-            }
+            LOGGER.log(Level.INFO, "Eleitor {0} autenticado via DB. Endereço: {1}", new Object[]{usuario, endereco});
+            // O contrato não tem um método 'autorizarEleitor' separado.
+            // A autorização é implícita na chamada do 'votar' com a assinatura do trustedSigner.
+            // Se esta função for usada, ela deve apenas autenticar o eleitor no DB
+            // e depois o processo de votação deve gerar e usar a assinatura.
+            // Por simplicidade, vou lançar uma exceção indicando que a funcionalidade mudou.
+            throw new EleitorException("A autorização de eleitor é agora baseada em assinatura no contrato, não um método direto.");
         } else {
             throw new EleitorException("Credenciais inválidas.");
         }
     }
 
     /**
-     * Verifica as credenciais de um eleitor em um banco de dados usando
-     * JdbcTemplate.
+     * Verifica as credenciais de um eleitor em um banco de dados usando JdbcTemplate.
      */
     private boolean verificarCredenciais(String usuario, String senha) {
         String sql = "SELECT COUNT(*) FROM autorizarEleitor WHERE login = ? AND senha = ?";
-        // Usando queryForObject para um único resultado. Retorna null se não houver
-        // resultado, ou o valor Integer.
         Integer count = jdbcTemplate.queryForObject(sql, Integer.class, usuario, senha);
         return count != null && count > 0;
     }
@@ -195,11 +215,36 @@ public class VotingService {
      */
     public String verificarStatusContrato() {
         try {
-            // Usa o 'web3j' injetado, que já está configurado.
             Web3ClientVersion clientVersion = web3j.web3ClientVersion().send();
             return "Conectado ao nó Ethereum: " + clientVersion.getWeb3ClientVersion();
         } catch (Exception e) {
             return "Erro ao conectar ao nó Ethereum: " + e.getMessage();
         }
+    }
+
+    /**
+     * Método para definir um novo Trusted Signer no contrato.
+     * Este método deve ser chamado apenas pelo proprietário do contrato.
+     * @param newSignerAddress O novo endereço do trusted signer.
+     * @return Hash da transação.
+     * @throws Exception se a transação falhar.
+     */
+    public String setTrustedSigner(String newSignerAddress) throws Exception {
+        LOGGER.log(Level.INFO, "Tentando definir novo Trusted Signer: {0}", newSignerAddress);
+        TransactionReceipt receipt = votingContract.setTrustedSigner(newSignerAddress).send();
+        LOGGER.log(Level.INFO, "Novo Trusted Signer definido. Hash da Transação: {0}", receipt.getTransactionHash());
+        return receipt.getTransactionHash();
+    }
+
+    /**
+     * Verifica se um eleitor já votou no contrato.
+     * @param eleitorAddress O endereço do eleitor.
+     * @return true se já votou, false caso contrário.
+     * @throws Exception se a chamada falhar.
+     */
+    public boolean verificarSeEleitorVotou(String eleitorAddress) throws Exception {
+        LOGGER.log(Level.INFO, "Verificando se o eleitor {0} já votou.", eleitorAddress);
+        // CHAMADA DO MÉTODO CORRIGIDA: Nome do método `verificarSeVotou` no contrato.
+        return votingContract.verificarSeVotou(eleitorAddress).send();
     }
 }

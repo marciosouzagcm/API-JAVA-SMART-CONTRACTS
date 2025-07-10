@@ -1,5 +1,5 @@
 Listagem de caminhos de pasta
-O número de série do volume é DE37-0691
+O nï¿½mero de sï¿½rie do volume ï¿½ DE37-0691
 C:.
 |   .gitattributes
 |   .gitignore
@@ -290,7 +290,7 @@ C:.
 |                       ZipString.class
 |                       
 +---src
-|   +---ExplicaçãoGeral
+|   +---Explicaï¿½ï¿½oGeral
 |   |       ContractConfig.md
 |   |       Web3jConfig.md
 |   |       
