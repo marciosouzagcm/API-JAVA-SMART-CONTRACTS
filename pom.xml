@@ -7,8 +7,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.7</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+        <relativePath/> </parent>
 
     <groupId>com.suaempresa.api</groupId>
     <artifactId>api-java-smart-contracts</artifactId>
@@ -50,13 +49,12 @@
             <artifactId>core</artifactId>
             <version>${web3j.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.web3j</groupId>
+            <artifactId>abi</artifactId>
+            <version>${web3j.version}</version>
+        </dependency>
 
-        <!-- SpringDoc OpenAPI (Swagger UI) Dependency -->
-        <!-- This dependency is correct for enabling Swagger UI. -->
-        <!-- Ensure you are accessing Swagger UI at the correct URL, typically: -->
-        <!-- http://localhost:8080/swagger-ui/index.html (or your application's base URL) -->
-        <!-- Also, ensure your Spring Boot application has a configuration class -->
-        <!-- to define OpenAPI beans if you need custom documentation. -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -133,7 +131,7 @@
                                 </includes>
                                 <excludes>
                                     <exclude>META-INF/additional-spring-configuration-metadata.json</exclude>
-                                </excludes>
+                                    </excludes>
                             </abiSourceFiles>
                             <packageName>com.votacao.contracts</packageName>
                         </configuration>

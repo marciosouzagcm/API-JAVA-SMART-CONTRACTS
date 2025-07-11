@@ -13446,12 +13446,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x14C632Ff8056B76E6395bDA381375798185abe9a",
-      "transactionHash": "0x5b407ac926c8406c9edc335e687514f5973705e565a92f09a09645054280619a"
+      "address": "0x545E7a7C29575844071E6A510E488d69515F1202",
+      "transactionHash": "0xa4e2c4da3370605b66d75a731ca7186853e113945ad6be5a76a59cf554d73a93"
     }
   },
   "schemaVersion": "3.4.14",
-  "updatedAt": "2025-07-10T18:23:09.757Z",
+  "updatedAt": "2025-07-11T17:45:07.719Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "marciosouzagcm@gmail.com",
